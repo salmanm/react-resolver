@@ -50,7 +50,7 @@ export default class Resolver extends React.Component {
     renderToStaticMarkup(
       <Resolver data={initialData} onResolve={((promise) => {
         queue.push(promise);
-        return Promise.resolve(true); 
+        return Promise.resolve(true);
       })}>
         {render}
       </Resolver>
@@ -148,8 +148,8 @@ export default class Resolver extends React.Component {
     const { props, resolve } = thisProps;
 
     Object.keys(resolve).forEach(name => {
-      // Ignore existing supplied props or existing resolved values
-      if (!props.hasOwnProperty(name) && !nextState.resolved.hasOwnProperty(name)) {
+      // Ignore only if the prop is already resolved
+      if (!nextState.resolved.hasOwnProperty(name)) {
         const factory = resolve[name];
         const value = factory(props);
         const isPromise = (
